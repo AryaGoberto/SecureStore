@@ -1,0 +1,798 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Titan+One&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/*
+========================================================================================================================
+  STYLE UNTUK HALAMAN LOGIN
+========================================================================================================================
+*/
+.login-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #84AE92;
+    overflow: hidden; /* Mencegah scroll saat transisi */
+}
+
+/* login-box sekarang adalah kontainer utama yang tetap */
+.login-box{
+    position: relative; /* Penting untuk positioning anak-anaknya */
+    width: 716px;
+    height: 565px;
+    padding: 60px 80px;
+    background: #B9D4AA;
+    border: 1px solid #B9D4AA;
+    border-radius: 30px;
+    box-shadow: 0px 12px 0px rgba(0, 0, 0, 0.25);
+    overflow: hidden; /* Penting: menyembunyikan konten yang di luar batas saat transisi */
+}
+
+/* Konten form di dalam login-box */
+.form-content {
+    position: absolute; /* Penting untuk transisi slide */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 60px 80px; /* Padding sama dengan login-box agar konten tetap di tengah */
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+    opacity: 0;
+    pointer-events: none; /* Mencegah interaksi saat tidak aktif */
+    box-sizing: border-box; /* Agar padding tidak menambah lebar/tinggi */
+    display: flex; /* Untuk flexbox di dalam form-content */
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-content.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto; /* Memungkinkan interaksi saat aktif */
+}
+
+/* Untuk transisi slide ke kiri (keluar) */
+.login-content.inactive-left {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+/* Untuk transisi slide ke kanan (keluar) */
+.register-content.inactive-right {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+/* Untuk tampilan awal (bukan transisi) */
+.login-content {
+    transform: translateX(0); /* Default position */
+}
+.register-content {
+    transform: translateX(100%); /* Awalnya di luar layar ke kanan */
+}
+
+
+.login-header{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 20px 0 50px 0;
+}
+.login-header header{
+    font-family: 'Titan One', sans-serif;
+    color: #FFF;
+    font-size: 46px;
+    margin-bottom: 1px;
+    /* --- EFEK STROKE YANG LEBIH TEBAL --- */
+    -webkit-text-stroke-width: 2px; /* Ditingkatkan menjadi 2px, bisa juga 3px atau lebih */
+    -webkit-text-stroke-color: #007C0E; /* Warna stroke */
+    
+    /* Untuk mendukung lebih banyak browser atau membuat efek lebih kuat,
+       gunakan text-shadow yang lebih banyak arah atau dengan offset lebih besar */
+    text-shadow: 
+        /* Bayangan untuk stroke 1px */
+        1px 1px 0 #007C0E, 
+        -1px -1px 0 #007C0E, 
+        1px -1px 0 #007C0E, 
+        -1px 1px 0 #007C0E,
+        /* Tambahan bayangan untuk stroke 2px (geser lebih jauh) */
+        2px 2px 0 #007C0E,
+        -2px -2px 0 #007C0E,
+        2px -2px 0 #007C0E,
+        -2px 2px 0 #007C0E,
+        /* Bayangan di sumbu vertikal/horizontal saja untuk mengisi celah */
+        1px 0px 0 #007C0E,
+        -1px 0px 0 #007C0E,
+        0px 1px 0 #007C0E,
+        0px -1px 0 #007C0E; 
+    /* --- EFEK STROKE BERAKHIR --- */
+}
+.login-header p{
+    color: #555;
+}
+.input-box{
+    position: relative;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 25px; 
+}
+.input-box label{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: #555;
+    transition: .15s ease-in-out;
+    pointer-events: none;
+}
+.input-box input{
+    width: 100%;
+    height: 50px;
+}
+.input-box .input-field{
+    font-size: 1em;
+    color: #333;
+    padding-left: 15px;
+    border: 1px solid #ddd;
+    border-radius: 11px;
+    outline: none;
+}
+.input-box input[type="password"]{
+    margin-bottom: 10px;
+}
+.input-box .input-field:focus{
+    outline: 2px solid #007C0E;
+}
+.input-field:focus ~ label, .input-field.has-content ~ label{
+    top: -18px;
+    left: 0px;
+    font-size: 12px;
+    color: #007C0E;
+    padding: 0 5px;
+}
+.input-field:focus::placeholder, .input-field.has-content::placeholder {
+    opacity: 0;
+}
+.input-field:valid ~ label{
+    color: #555;
+}
+.icon{
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #007C0E;
+}
+.forgot{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.forgot-link:hover{
+    text-decoration: underline;
+}
+.section-login{
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #555;
+}
+#check{
+    margin-right: 5px;
+    cursor: pointer;
+}
+section .forgot-link{
+    font-weight: 500;
+    text-decoration: none;
+    color: #007C0E;
+}
+.input-submit{
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: #FFF;
+    background: #84AE92;
+    border: none;
+    border-radius: 11px;
+    cursor: pointer;
+    margin-top: 5px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+}
+.sign-up{
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.sign-up p{
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+}
+.sign-up p>a{
+    text-decoration: none;
+    color: #007C0E;
+    margin-left: 5px;
+}
+.sign-up a:hover{
+    text-decoration: underline;
+}
+                                                            /* LOGIN STYLING ENDS */
+
+
+
+/*
+=============================================================================================================================
+  STYLE UNTUK HALAMAN DASHBOARD DAN SIDEBAR
+=============================================================================================================================
+*/
+.dashboard-body {
+    background-color: #f0f2f5;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background-color: #B9D4AA; /* Warna hijau muda sidebar */
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    /* padding: 20px; */
+}
+
+.sidebar-header {
+    background-color: #226F54;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+}
+
+.sidebar-header h1 {
+    font-size: 1.8em;
+    text-align: center;
+    color: #ffffff; /* White */
+    font-family: 'Titan One', sans-serif;
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #b0c9b2;
+    padding-bottom: 20px;
+}
+
+.profile img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    margin-bottom: 10px;
+}
+
+.profile p {
+    font-weight: 500;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+}
+
+.sidebar-nav li {
+    margin-bottom: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.sidebar-nav a {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.sidebar-nav a:hover {
+    background-color: #A9C4A4;
+}
+
+.sidebar-nav li.dashboard-active a {
+    background-color: #E0EBE1;
+    font-weight: 600;
+    color: #224223;
+}
+
+.sidebar-nav li.datauser-active a {
+    background-color: #E0EBE1;
+    font-weight: 600;
+    color: #224223;
+}
+
+.sidebar-nav li.datakategori-active a {
+    background-color: #E0EBE1;
+    font-weight: 600;
+    color: #224223;
+}
+
+.sidebar-nav li.databarang-active a {
+    background-color: #E0EBE1;
+    font-weight: 600;
+    color: #224223;
+}
+
+
+.sidebar-nav a i {
+    margin-right: 15px;
+    width: 20px; /* Jaga ikon tetap sejajar */
+}
+/* Sidebar Ends*/
+
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-header {
+    background-color: #fff;
+    padding: 19px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.breadcrumbs p {
+    color: #777;
+}
+
+.btn-logout a {
+    text-decoration: none;
+    color: #777777;
+}
+
+.dashboard {
+    padding: 30px;
+}
+
+.dashboard-title-banner {
+    background-color: #279F41; /* Hijau tua */
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.dashboard-title-banner h2 {
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.cards-container {
+    display: flex;
+    gap: 30px; /* Jarak antar kartu */
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    flex-grow: 1; /* Biar kartu mengisi ruang */
+    min-width: 200px; /* Lebar minimum kartu */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+}
+
+.card-number {
+    font-size: 3em;
+    font-weight: 700;
+}
+
+.card-label {
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+/* Warna spesifik untuk setiap kartu */
+.card-user { background-color: #73BA7C; } /* Olive Drab */
+.card-kategori { background-color: #BAB56C; } /* Dark Khaki */
+.card-barang { background-color: #3E5173; } /* Cadet Blue */
+/* Main Content Ends*/
+                                                            /* DASHBOARD & SIDEBAR STYLING ENDS */
+
+
+              
+                                                            
+                                                            
+/*
+========================================================================================================================
+  STYLE UNTUK HALAMAN DATA USER
+========================================================================================================================
+*/
+.data-user-page {
+    padding: 30px;
+}
+/* Judul Banner (Bisa dipakai di halaman lain juga) */
+.content-banner {
+    background-color: #73BA7C; /* Warna hijau muda */
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.content-banner h2 {
+    font-size: 2em;
+    font-weight: 600;
+}
+
+/* Kartu Pembungkus Tabel */
+.table-card {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+/* Baris Aksi di atas tabel */
+.table-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.actions-left, .actions-right {
+    display: flex;
+    gap: 10px; /* Jarak antar item */
+}
+
+/* Style umum untuk tombol dan input */
+.table-actions .btn, .table-actions input {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+.table-actions input {
+    cursor: text;
+}
+
+/* Style spesifik tombol */
+.btn-tambah {
+    color: white;
+    text-decoration: none;
+}
+
+.btn.btn-primary {
+    background-color: #28a745; /* Hijau */
+    color: white;
+    border-color: #28a745;
+}
+
+.btn.btn-secondary {
+    background-color: #e9ecef; /* Abu-abu muda */
+    color: #333;
+}
+
+/* Style Tabel */
+.table-container {
+    overflow-x: auto; /* Agar tabel bisa di-scroll horizontal jika tidak muat */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Menyatukan border */
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+thead th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+}
+
+tbody tr:hover {
+    background-color: #f1f3f5;
+}
+
+/* Tombol Aksi di dalam tabel */
+.btn-aksi {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    margin-right: 5px;
+    
+}
+
+.btn-aksi a {
+    text-decoration: none;
+}
+
+.btn-aksi.edit { background-color: #ffc107; } /* Kuning */
+.btn-aksi.delete { background-color: #dc3545; } /* Merah */
+
+
+/*
+========================================================================================================================
+  STYLE UNTUK HALAMAN DATA KATEGORI
+========================================================================================================================
+*/
+.data-kategori-page {
+    padding: 30px;
+}
+
+/* Warna banner yang kekuningan */
+.banner-kategori {
+  background-color: #BAB56C; /* Warna Dark Khaki */
+  color: white; /* Ganti warna teks jadi putih agar kontras */
+}
+
+
+/*
+========================================================================================================================
+  STYLE UNTUK HALAMAN DATA BARANG
+========================================================================================================================
+*/
+
+.data-barang-page {
+    padding: 30px;
+}
+
+/* Warna banner yang kebiruan */
+.banner-barang {
+  background-color: #3E5173; /* Warna Blue Grey */
+  color: white;
+}
+
+
+/*
+========================================================================================================================
+  STYLE UNTUK HALAMAN TAMBAH KATEGORI
+========================================================================================================================
+*/
+
+.form-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    overflow: hidden; /* Agar border-radius rapi */
+}
+
+.form-header {
+    padding: 20px 25px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.form-header h3 {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #343a40;
+}
+
+.main-form {
+    padding: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #495057;
+    font-size: 0.9em;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1em;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input[type="text"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    outline: none;
+}
+
+.form-actions {
+    margin-top: 30px;
+}
+
+.btn-simpan {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff; /* Warna biru */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-simpan:hover {
+    background-color: #0056b3;
+}
+
+
+/*
+========================================================================================================================
+  STYLE UNTUK HALAMAN TAMBAH BARANG
+========================================================================================================================
+*/
+
+/* Selector ini menargetkan semua jenis input yang kita gunakan 
+  (teks, email, password, angka) dan juga dropdown (select) 
+  di dalam .form-group agar memiliki tampilan yang sama.
+*/
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="number"],
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1em;
+    background-color: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/*
+========================================================================================================================
+  STYLE UNTUK FITUR UPLOAD FOTO PROFIL
+========================================================================================================================
+*/
+
+.profile-upload .upload-area {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Jarak antara foto dan tombol */
+}
+
+.profile-pic-preview .pic-display {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* Membuatnya jadi lingkaran */
+    background-color: #e9ecef;
+    border: 2px dashed #ced4da;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: #adb5bd;
+
+    /* Penting untuk preview gambar */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Mengganti kursor saat di atas tombol upload */
+.upload-controls .btn {
+    cursor: pointer;
+}
+
+.upload-controls .file-name {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.8em;
+    color: #6c757d;
+    font-style: italic;
+}
+
+
+/*
+========================================================================================================================
+  STYLE UNTUK PESAN ERROR VALIDASI 
+========================================================================================================================
+*/
+
+.error-message {
+  color: #dc3545; /* Warna merah untuk error */
+  font-size: 0.85em; /* Ukuran font lebih kecil */
+  font-weight: 500;
+  margin-top: 5px; /* Jarak dari input di atasnya */
+  display: none; /* Sembunyi secara default */
+}
+
+/* Style tambahan untuk input yang error (border jadi merah) */
+input.input-error {
+  border-color: #dc3545;
+}
+input.input-error:focus {
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, .25); /* Efek focus juga jadi merah */
+}
+
+
+/*
+========================================================================================================================
+  STYLE TAMBAHAN UNTUK OPSI GANTI FOTO PROFIL
+========================================================================================================================
+*/
+
+/* Pastikan wadah preview menjadi acuan posisi untuk overlay */
+.profile-pic-preview {
+    position: relative;
+    cursor: pointer;
+}
+
+/* Style untuk lapisan overlay */
+.pic-overlay {
+    position: absolute; /* Membuatnya melayang di atas .pic-display */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* Mengikuti bentuk lingkaran */
+    background-color: rgba(0, 0, 0, 0.5); /* Warna hitam transparan */
+    
+    /* Pusatkan konten di dalam overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Sembunyikan secara default & siapkan transisi */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Tampilkan overlay saat wadah preview di-hover */
+.profile-pic-preview:hover .pic-overlay {
+    opacity: 1;
+}
+
+/* Style untuk teks & ikon "Ganti" di dalam overlay */
+.ganti-foto-btn {
+    color: white;
+    font-size: 0.9em;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}

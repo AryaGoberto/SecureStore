@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Kategori - SecureStore</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body class="dashboard-body">
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>SecureStore</h1>
+            </div>
+            <div class="profile">
+                <img src="profile picture.png"> <p>Dzakwan M. Astrea</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="datauser.html"><i class="fas fa-users"></i> Data User</a></li>
+                    <li class="datakategori-active"><a href="datakategori.html"><i class="fas fa-tags"></i> Data Kategori</a></li>
+                    <li><a href="databarang.html"><i class="fas fa-box"></i> Data Barang</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="breadcrumbs">
+                    <p>Data Kategori</p>
+                </div>
+                <div class="btn-logout">
+                    <a href="login.html">Logout</a>
+                </div>
+            </header>
+
+            <section class="data-kategori-page">
+                <div class="content-banner banner-kategori">
+                    <h2>Data Kategori</h2>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-actions">
+                        <div class="actions-left">
+                            <button class="btn btn-primary"><a href="tambah-kategori.html" class="btn-tambah">+ Tambah</a></button>
+                        </div>
+                        <div class="actions-right">
+                            <input type="search" placeholder="Search...">
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Kategori</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Elektronik</td>
+                                    <td>
+                                        <button class="btn-aksi delete">Hapus</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Pakaian</td>
+                                    <td>
+                                        <button class="btn-aksi delete">Hapus</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
