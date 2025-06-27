@@ -120,7 +120,7 @@
     position: relative;
     width: 90%;
     margin: auto;
-    margin-bottom: 25px; 
+    margin-bottom: 20px; 
 }
 .input-box label{
     position: absolute;
@@ -738,6 +738,16 @@ tbody tr:hover {
   font-weight: 500;
   margin-top: 5px; /* Jarak dari input di atasnya */
   display: none; /* Sembunyi secara default */
+}
+
+.register-content .error-message {
+    position: absolute;   /* Kunci utamanya */
+    bottom: -22px;        /* Posisikan di bawah .input-box. Sesuaikan nilainya */
+    left: 5px;            /* Posisikan sedikit dari kiri */
+    color: #dc3545;
+    font-size: 0.85em;
+    font-weight: 500;
+    display: none;        /* Tetap disembunyikan secara default */
 }
 
 /* Style tambahan untuk input yang error (border jadi merah) */

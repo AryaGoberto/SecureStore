@@ -62,6 +62,44 @@ document.addEventListener('DOMContentLoaded', () => {
                 loginContent.classList.remove('inactive-left');
             }, 600); // Sesuaikan dengan durasi transisi CSS (0.6s = 600ms)
         });
+
+        // Kode baru untuk konfirmasi password register
+        const registerPassword = document.getElementById('register-password');
+        const registerConfirmPassword = document.getElementById('register-confirm-password');
+        const registerError = document.getElementById('register-error-message');
+        const registerForm = registerContent.querySelector('form');
+
+        function validateRegisterPassword() {
+            if (registerPassword.value !== registerConfirmPassword.value) {
+                // Jika tidak cocok, tampilkan error
+                registerError.textContent = 'Konfirmasi password tidak cocok!';
+                registerError.style.display = 'block';
+                registerConfirmPassword.classList.add('input-error');
+                return false;
+            } else {
+                // Jika cocok, sembunyikan error
+                registerError.textContent = '';
+                registerError.style.display = 'none';
+                registerConfirmPassword.classList.remove('input-error');
+                return true;
+            }
+        }
+
+        // Jalankan validasi setiap kali user mengetik
+        if(registerPassword && registerConfirmPassword){
+            registerPassword.addEventListener('keyup', validateRegisterPassword);
+            registerConfirmPassword.addEventListener('keyup', validateRegisterPassword);
+        }
+
+        // Pengecekan terakhir sebelum form register disubmit
+        if(registerForm) {
+            registerForm.addEventListener('submit', function(event) {
+                if (!validateRegisterPassword()) {
+                    event.preventDefault(); // Batalkan submit jika password tidak cocok
+                    alert('Registrasi gagal, pastikan konfirmasi password sudah benar.');
+                }
+            });
+        }
     }
     
     // --- KODE UNTUK DROPDOWN SETTINGS DARI SEBELUMNYA ---
