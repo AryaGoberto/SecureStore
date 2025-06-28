@@ -28,7 +28,7 @@ def tambah_kategori_controller():
         else:
             new_kategori = KategoriBarang(nama_kategori=nama_kategori)
             new_kategori.save()
-            # flash('Kategori added successfully!', 'success')
+            flash('Kategori added successfully!', 'success')
             return redirect(url_for('kategoriapp.kategori_list'))
             
     return render_template('kategori/tambah-kategori.html')
@@ -41,7 +41,7 @@ def hapus_kategori_controller(id):
             flash(f"Cannot delete category '{kategori.nama_kategori}' because it contains items. Please re-assign or delete the items first.", 'error')
         else:
             kategori.delete()
-            # flash('Kategori deleted successfully!', 'success')
+            flash('Kategori deleted successfully!', 'success')
     else:
         flash('Kategori not found!', 'error')
         

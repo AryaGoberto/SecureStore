@@ -1,61 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - SecureStore</title>
-    <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-</head>
-<body class="dashboard-body">
-    <div class="container">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h1>SecureStore</h1>
-            </div>
-            <div class="profile">
-                <img src="profile picture.png"> <p>Dzakwan M. Astrea</p>
-            </div>
-            <nav class="sidebar-nav">
-                <ul>
-                    <li class="dashboard-active"><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                    <li><a href="datauser.html"><i class="fas fa-users"></i> Data User</a></li>
-                    <li><a href="datakategori.html"><i class="fas fa-tags"></i> Data Kategori</a></li>
-                    <li><a href="databarang.html"><i class="fas fa-box"></i> Data Barang</a></li>
-                </ul>
-            </nav>
-        </aside>
+{% extends 'layouts/base.html' %}
+{% set active_page = 'dashboard' %} 
 
-        <main class="main-content">
-            <header class="main-header">
-                <div class="breadcrumbs">
-                    <p>Home / Dashboard</p>
-                </div>
-                <div class="btn-logout">
-                    <a href="login.html">Logout</a>
-                </div>
-            </header>
+{% block title %}Dashboard - SecureStore{% endblock %}
 
-            <section class="dashboard">
-                <div class="dashboard-title-banner">
-                    <h2>Dashboard</h2>
-                </div>
-                <div class="cards-container">
-                    <div class="card card-user">
-                        <span class="card-number">6</span>
-                        <span class="card-label">Total User</span>
-                    </div>
-                    <div class="card card-kategori">
-                        <span class="card-number">5</span>
-                        <span class="card-label">Total Kategori</span>
-                    </div>
-                    <div class="card card-barang">
-                        <span class="card-number">53</span>
-                        <span class="card-label">Total Barang</span>
-                    </div>
-                </div>
-            </section>
-        </main>
+{% block breadcrumbs %}Home / Dashboard{% endblock %}
+
+{% block content %}
+<section class="dashboard">
+    <div class="dashboard-title-banner">
+        <h2>Dashboard</h2>
     </div>
-</body>
-</html>
+    <div class="cards-container">
+        {% if current_user.role == 'admin' %}
+        <div class="card card-user">
+            <span class="card-number">{{ total_users }}</span>
+            <span class="card-label">Total User</span>
+        </div>
+        {% endif %}
+        <div class="card card-kategori">
+            <span class="card-number">{{ total_kategori }}</span>
+            <span class="card-label">Total Kategori</span>
+        </div>
+        <div class="card card-barang">
+            <span class="card-number">{{ total_barang }}</span>
+            <span class="card-label">Total Barang</span>
+        </div>
+    </div>
+</section>
+{% endblock %}

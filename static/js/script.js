@@ -62,48 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 loginContent.classList.remove('inactive-left');
             }, 600); // Sesuaikan dengan durasi transisi CSS (0.6s = 600ms)
         });
-
-        // Kode baru untuk konfirmasi password register
-        const registerPassword = document.getElementById('register-password');
-        const registerConfirmPassword = document.getElementById('register-confirm-password');
-        const registerError = document.getElementById('register-error-message');
-        const registerForm = registerContent.querySelector('form');
-
-        function validateRegisterPassword() {
-            if (registerPassword.value !== registerConfirmPassword.value) {
-                // Jika tidak cocok, tampilkan error
-                registerError.textContent = 'Konfirmasi password tidak cocok!';
-                registerError.style.display = 'block';
-                registerConfirmPassword.classList.add('input-error');
-                return false;
-            } else {
-                // Jika cocok, sembunyikan error
-                registerError.textContent = '';
-                registerError.style.display = 'none';
-                registerConfirmPassword.classList.remove('input-error');
-                return true;
-            }
-        }
-
-        // Jalankan validasi setiap kali user mengetik
-        if(registerPassword && registerConfirmPassword){
-            registerPassword.addEventListener('keyup', validateRegisterPassword);
-            registerConfirmPassword.addEventListener('keyup', validateRegisterPassword);
-        }
-
-        // Pengecekan terakhir sebelum form register disubmit
-        if(registerForm) {
-            registerForm.addEventListener('submit', function(event) {
-                if (!validateRegisterPassword()) {
-                    event.preventDefault(); // Batalkan submit jika password tidak cocok
-                    alert('Registrasi gagal, pastikan konfirmasi password sudah benar.');
-                }
-            });
-        }
     }
     
-    // --- KODE UNTUK DROPDOWN SETTINGS DARI SEBELUMNYA ---
-    // (biarkan kode yang sudah ada)
 
 
     // --- KODE BARU UNTUK UPLOAD FOTO PROFIL ---
@@ -151,44 +111,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- KODE BARU UNTUK VALIDASI KONFIRMASI PASSWORD ---
-    const passwordInput = document.getElementById('password');
-    const confirmPasswordInput = document.getElementById('konfirmasi-password');
-    const passwordError = document.getElementById('password-error');
-    const userForm = document.querySelector('.main-form'); // Menargetkan form
+    // --- KODE BARU UNTUK OTOMATIS MENUTUP FLASH MESSAGES ---
+    const flashMessages = document.querySelectorAll('.flash-messages-container .alert');
 
-    // Fungsi untuk mengecek apakah password cocok
-    function validatePassword() {
-        if (passwordInput.value !== confirmPasswordInput.value) {
-            // Jika tidak cocok
-            passwordError.textContent = 'Konfirmasi password tidak cocok!';
-            passwordError.style.display = 'block'; // Tampilkan pesan error
-            confirmPasswordInput.classList.add('input-error'); // Tambahkan border merah
-            return false; // Kembalikan nilai false
-        } else {
-            // Jika cocok
-            passwordError.textContent = '';
-            passwordError.style.display = 'none'; // Sembunyikan pesan error
-            confirmPasswordInput.classList.remove('input-error'); // Hapus border merah
-            return true; // Kembalikan nilai true
-        }
-    }
+    flashMessages.forEach(alert => {
+        // Set a timeout to remove the alert after 5 seconds (5000 milliseconds)
+        setTimeout(() => {
+            alert.remove();
+        }, 5000); // Adjust time as needed
+    });
 
-    // Cek apakah elemen-elemen ini ada di halaman
-    if (passwordInput && confirmPasswordInput && passwordError && userForm) {
-        
-        // Jalankan validasi setiap kali user mengetik di salah satu kolom
-        passwordInput.addEventListener('keyup', validatePassword);
-        confirmPasswordInput.addEventListener('keyup', validatePassword);
+    // Also keep the manual close button functionality
+    const closeButtons = document.querySelectorAll('.close-alert');
 
-        // Tambahkan pengecekan terakhir saat form akan disubmit
-        userForm.addEventListener('submit', function(event) {
-            // Jika validasi password gagal...
-            if (!validatePassword()) {
-                // ...maka batalkan pengiriman form
-                event.preventDefault();
-                alert('Gagal menyimpan! Pastikan konfirmasi password sudah benar.');
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const alertDiv = this.closest('.alert');
+            if (alertDiv) {
+                alertDiv.remove();
             }
         });
-    }
+    });
 });

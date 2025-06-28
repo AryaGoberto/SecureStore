@@ -28,7 +28,7 @@ def tambah_barang_controller():
         kategori_id = request.form.get('kategori_barang')
 
         if not nama_barang or not stok or not kategori_id:
-            # flash('All fields are required!', 'error')
+            flash('All fields are required!', 'error')
             return render_template('barang/tambah-barang.html', kategori_list=kategori_list)
         
         new_barang = DataBarang(
@@ -37,7 +37,7 @@ def tambah_barang_controller():
             kategori_id=kategori_id
         )
         new_barang.save()
-        # flash('Barang added successfully!', 'success')
+        flash('Barang added successfully!', 'success')
         return redirect(url_for('barangapp.barang_list'))
     
     return render_template('barang/tambah-barang.html', kategori_list=kategori_list)
@@ -46,19 +46,19 @@ def tambah_barang_controller():
 def edit_barang_controller(id):
     barang = DataBarang.get_by_id(id)
     if not barang:
-        # flash('Barang not found!', 'error')
+        flash('Barang not found!', 'error')
         return redirect(url_for('barangapp.barang_list'))
 
     if request.method == 'POST':
         stok = request.form.get('stok_barang')
         
         if not stok:
-            # flash('Stok field is required!', 'error')
+            flash('Stok field is required!', 'error')
             return render_template('barang/edit-barang.html', barang=barang)
             
         barang.stok = int(stok)
         barang.save()
-        # flash('Stok updated successfully!', 'success')
+        flash('Stok updated successfully!', 'success')
         return redirect(url_for('barangapp.barang_list'))
 
     return render_template('barang/edit-barang.html', barang=barang)
@@ -68,8 +68,8 @@ def hapus_barang_controller(id):
     barang = DataBarang.get_by_id(id)
     if barang:
         barang.delete()
-        # flash('Barang deleted successfully!', 'success')
-    # else:
-        # flash('Barang not found!', 'error')
+        flash('Barang deleted successfully!', 'success')
+    else:
+        flash('Barang not found!', 'error')
 
     return redirect(url_for('barangapp.barang_list'))

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureStore</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body class="login-body">
+    <div class="login-box">
+        
+        <div class="form-content login-content active">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages-container">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                {{ message }}
+                                <button type="button" class="close-alert" aria-label="Close">&times;</button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            <form action="{{ url_for('authapp.login') }}" method="post" autocomplete="off">
+                <div class="login-header">
+                    <header>SecureStore</header>
+                    <p>Secure your inventory now!</p>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="input-field" name="username" required>
+                    <label>Username</label>
+                    <i class='bx bx-user icon'></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" class="input-field" name="password" required>
+                    <label>Password</label>
+                    <i class='bx bx-lock icon'></i>
+                </div>
+                <div class="forgot">
+                    <section class="section-login">
+                        <input type="checkbox" name="remember_me" id="check">
+                        <label for="check">Remember me</label>
+                    </section>
+                </div>
+                <div class="input-box">
+                    <input type="submit" class="input-submit" value="Sign In">
+                </div>
+                <div class="sign-up">
+                    <p>Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-content register-content">
+            <form action="{{ url_for('authapp.register') }}" method="post" autocomplete="off">
+                <div class="login-header">
+                    <header>SecureStore</header>
+                    <p>Create your account!</p>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="input-field" name="nama_lengkap" required>
+                    <label>Nama Lengkap</label>
+                    <i class='bx bx-user icon'></i>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="input-field" name="username" required>
+                    <label>Username</label>
+                    <i class='bx bx-user icon'></i>
+                </div>
+                <div class="input-box">
+                    <input type="email" class="input-field" name="email" required>
+                    <label>Email</label>
+                    <i class='bx bx-envelope icon'></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" class="input-field" name="password" required>
+                    <label>Password</label>
+                    <i class='bx bx-lock icon'></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" class="input-field" name="konf_password" required>
+                    <label>Confirm Password</label>
+                    <i class='bx bx-lock icon'></i>
+                </div>
+                <div class="input-box">
+                    <input type="submit" class="input-submit" value="Register">
+                </div>
+                
+                <div class="bottom-options">
+                <div class="sign-up">
+                   <p>Already have an account? <a href="#" id="signin-link">Sign In</a></p>
+                   <span style="color: #888;">&nbspor sign up with</span>
+                    <a href="{{ url_for('authapp.google_register') }}" class="google-btn-small">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google logo">
+                    </a>
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const closeButtons = document.querySelectorAll('.close-alert');
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.closest('.alert').remove();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

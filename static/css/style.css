@@ -82,7 +82,7 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    margin: 20px 0 50px 0;
+    margin: 10px 0 25px 0;
 }
 .login-header header{
     font-family: 'Titan One', sans-serif;
@@ -120,7 +120,7 @@
     position: relative;
     width: 90%;
     margin: auto;
-    margin-bottom: 20px; 
+    margin-bottom: 18px;
 }
 .input-box label{
     position: absolute;
@@ -142,9 +142,10 @@
     border-radius: 11px;
     outline: none;
 }
-.input-box input[type="password"]{
-    margin-bottom: 10px;
+.konf_password{
+    margin-bottom: 20px;
 }
+
 .input-box .input-field:focus{
     outline: 2px solid #007C0E;
 }
@@ -169,6 +170,11 @@
     font-size: 20px;
     color: #007C0E;
 }
+
+.bx-lock{
+    top: 45%;
+}
+
 .forgot{
     display: flex;
     justify-content: space-between;
@@ -177,9 +183,7 @@
     margin-left: auto;
     margin-right: auto;
 }
-.forgot-link:hover{
-    text-decoration: underline;
-}
+
 .section-login{
     display: flex;
     align-items: center;
@@ -190,11 +194,7 @@
     margin-right: 5px;
     cursor: pointer;
 }
-section .forgot-link{
-    font-weight: 500;
-    text-decoration: none;
-    color: #007C0E;
-}
+
 .input-submit{
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
@@ -203,7 +203,6 @@ section .forgot-link{
     border: none;
     border-radius: 11px;
     cursor: pointer;
-    margin-top: 5px;
     width: 90%;
     margin-left: auto;
     margin-right: auto;
@@ -211,15 +210,15 @@ section .forgot-link{
 }
 .sign-up{
     display: flex;
-    margin-top: 20px;
     align-items: center;
     justify-content: center;
     width: 100%;
 }
-.sign-up p{
+.sign-up p, span, a{
     font-size: 14px;
     color: #333;
     text-align: center;
+    margin-bottom: 10px;
 }
 .sign-up p>a{
     text-decoration: none;
@@ -411,11 +410,13 @@ section .forgot-link{
 .card-number {
     font-size: 3em;
     font-weight: 700;
+    color: #fff;
 }
 
 .card-label {
     font-size: 1.1em;
     font-weight: 500;
+    color: #fff;
 }
 
 /* Warna spesifik untuk setiap kartu */
@@ -688,6 +689,7 @@ tbody tr:hover {
 ========================================================================================================================
 */
 
+
 .profile-upload .upload-area {
     display: flex;
     align-items: center;
@@ -805,4 +807,103 @@ input.input-error:focus {
     align-items: center;
     gap: 5px;
     cursor: pointer;
+}
+
+.flash-messages-container {
+    position: fixed; /* Or absolute, depending on desired behavior */
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 400px;
+    z-index: 1000; /* Ensure it's on top of other content */
+    text-align: center;
+    padding: 0; /* Remove default padding if any */
+}
+
+.alert {
+    padding: 10px 30px 10px 15px; /* Added right padding for the close button */
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    position: relative; /* Needed for positioning the close button */
+    text-align: left; /* Align text to the left within the alert */
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+    color: #0c5460;
+}
+
+/* Style for the close button */
+.close-alert {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 20px;
+    line-height: 1;
+    color: inherit; /* Inherit color from the parent alert */
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.close-alert:hover {
+    opacity: 1;
+}
+
+
+/* static/css/style.css */
+
+/* Wadah baru untuk menyatukan opsi di bawah form */
+.bottom-options {
+    display: flex;
+    justify-content: space-between; /* Mendorong item ke sisi berlawanan */
+    align-items: center; /* Membuat item sejajar secara vertikal */
+    width: 90%; /* Sesuaikan dengan lebar form Anda */
+    margin: 20px auto 0 auto; /* Memberi jarak dari atas */
+}
+
+/* Mengatur grup "or sign up with Google" */
+.google-signup-wrapper {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.google-btn-small {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    transition: background-color 0.2s;
+    margin-left: 5px;
+}
+
+.google-btn-small:hover {
+    background-color: #e0e0e0;
+}
+
+.google-btn-small img {
+    width: 18px;
+    height: 18px;
 }

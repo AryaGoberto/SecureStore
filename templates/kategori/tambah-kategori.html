@@ -1,0 +1,25 @@
+{% extends 'layouts/base.html' %}
+{% set active_page = 'kategori_list' %}
+
+{% block title %}Tambah Kategori - SecureStore{% endblock %}
+
+{% block breadcrumbs %}Data Kategori{% endblock %}
+
+{% block content %}
+<section class="add-form-page">
+    <div class="form-card">
+        <div class="form-header">
+            <h3>Tambah Kategori</h3>
+        </div>
+        <form action="{{ url_for('kategoriapp.tambah_kategori') }}" method="post" class="main-form">
+            <div class="form-group">
+                <label for="nama-kategori">Nama Kategori</label>
+                <input type="text" id="nama-kategori" name="nama_kategori" placeholder="Masukkan Nama Kategori" required>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn-simpan">Simpan</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

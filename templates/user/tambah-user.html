@@ -1,0 +1,78 @@
+{% extends 'layouts/base.html' %}
+{% set active_page = 'user_list' %}
+
+{% block title %}Tambah User - SecureStore{% endblock %}
+
+{% block breadcrumbs %}Data User{% endblock %}
+
+{% block content %}
+<section class="add-form-page">
+    <div class="form-card">
+        <div class="form-header">
+            <h3>Tambah User</h3>
+        </div>
+        <form action="{{ url_for('userapp.tambah_user') }}" method="post" class="main-form" enctype="multipart/form-data">    
+            <div class="form-group profile-upload">
+                <label>Foto Profil</label>
+                <div class="upload-area">
+                    <div class="profile-pic-preview">
+                        <div class="pic-display" id="profile-pic-display">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+
+                        <div class="pic-overlay">
+                            <input type="file" id="foto-profil" name="foto-profil" accept="image/png, image/jpeg" style="display: none;">
+                            <label for="foto-profil" class="ganti-foto-btn">
+                                <i class="fas fa-camera"></i> Pilih
+                            </label>
+                        </div>
+                    </div>
+                    <div class="upload-controls">
+                        <span class="file-name" id="file-name-display">Tidak ada file dipilih</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="nama-lengkap">Nama Lengkap</label>
+                <input type="text" id="nama-lengkap" name="nama_lengkap" placeholder="Masukkan Nama Lengkap" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Masukkan Username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Masukkan Email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="role-user">Role</label>
+                <select id="role-user" name="role_user" required>
+                    <option value="" disabled selected>-- Pilih Role --</option>
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Masukkan Password Awal" required>
+            </div>
+
+            <div class="form-group">
+                <label for="konf-password">Konfirmasi Password</label>
+                <input type="password" id="konf-password" name="konf_password" placeholder="Ulangi Password Awal" required>
+                <span class="error-message" id="password-error"></span>
+            </div>
+            
+
+            <div class="form-actions">
+                <button type="submit" class="btn-simpan">Simpan</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

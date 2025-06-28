@@ -1,0 +1,41 @@
+{% extends 'layouts/base.html' %}
+{% set active_page = 'barang_list' %}
+
+{% block title %}Tambah Barang - SecureStore{% endblock %}
+
+{% block breadcrumbs %}Data Barang{% endblock %}
+
+{% block content %}
+<section class="add-form-page">
+    <div class="form-card">
+        <div class="form-header">
+            <h3>Tambah Barang</h3>
+        </div>
+        <form action="{{ url_for('barangapp.tambah_barang') }}" method="post" class="main-form">         
+            <div class="form-group">
+                <label for="kategori-barang">Nama Kategori</label>
+                <select id="kategori-barang" name="kategori_barang" required>
+                    <option value="" disabled selected>-- Pilih Kategori --</option>
+                    {% for kategori in kategori_list %}
+                    <option value="{{ kategori.no }}">{{ kategori.nama_kategori }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="nama-barang">Nama Barang</label>
+                <input type="text" id="nama-barang" name="nama_barang" placeholder="Masukkan Nama Barang" required>
+            </div>
+
+            <div class="form-group">
+                <label for="stok-barang">Stok</label>
+                <input type="number" id="stok-barang" name="stok_barang" value="0" min="0" required>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn-simpan">Simpan</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

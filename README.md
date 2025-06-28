@@ -34,7 +34,7 @@
 | Name         | Role                              |
 |--------------|-----------------------------------|
 | Deryl & Ary  | Frontend Developer (UI/UX)        |
-| Saidah       | Backend (CRUD, DB models)         |
+| Saida        | Backend (CRUD, DB models)         |
 | Devi         | Auth & Security (Login, Enkripsi) |
 | Arya         | OS Hardening + Logging + Docs     |
 

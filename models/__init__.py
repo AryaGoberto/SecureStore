@@ -1,4 +1,6 @@
+import flask_migrate
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 db = SQLAlchemy()
-DB_NAME = 'securestore.db'
+migrate = Migrate()

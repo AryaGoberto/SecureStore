@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SecureStore{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body class="dashboard-body">
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>SecureStore</h1>
+            </div>
+            <div class="profile">
+                <img src="{{ url_for('userapp.profile_pic', user_id=current_user.id) }}" alt="Profile Picture">
+                <p>{{ current_user.nama_lengkap }}</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li {% if active_page == 'dashboard' %}class="dashboard-active"{% endif %}><a href="{{ url_for('authapp.dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    {% if current_user.role == 'admin' %}
+                    <li {% if active_page == 'user_list' %}class="datauser-active"{% endif %}><a href="{{ url_for('userapp.user_list') }}"><i class="fas fa-users"></i> Data User</a></li>
+                    {% endif %}
+                    <li {% if active_page == 'kategori_list' %}class="datakategori-active"{% endif %}><a href="{{ url_for('kategoriapp.kategori_list') }}"><i class="fas fa-tags"></i> Data Kategori</a></li>
+                    <li {% if active_page == 'barang_list' %}class="databarang-active"{% endif %}><a href="{{ url_for('barangapp.barang_list') }}"><i class="fas fa-box"></i> Data Barang</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="breadcrumbs">
+                    <p>{% block breadcrumbs %}Home / Dashboard{% endblock %}</p>
+                </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages-container">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                            <button type="button" class="close-alert" aria-label="Close">
+                                &times;
+                            </button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% endwith %}
+                <div class="btn-logout">
+                    <a href="{{ url_for('authapp.logout') }}">Logout</a>
+                </div>
+            </header>
+
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const closeButtons = document.querySelectorAll('.close-alert');
+
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const alertDiv = this.closest('.alert');
+                    if (alertDiv) {
+                        alertDiv.remove();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{% extends 'layouts/base.html' %}
+{% set active_page = 'kategori_list' %}
+
+{% block title %}Data Kategori - SecureStore{% endblock %}
+
+{% block breadcrumbs %}Data Kategori{% endblock %}
+
+{% block content %}
+<section class="data-kategori-page">
+    <div class="content-banner banner-kategori">
+        <h2>Data Kategori</h2>
+    </div>
+
+    <div class="table-card">
+        <div class="table-actions">
+            <div class="actions-left">
+                <button class="btn btn-primary"><a href="{{ url_for('kategoriapp.tambah_kategori') }}" class="btn-tambah">+ Tambah</a></button>
+            </div>
+                <div class="actions-right">
+                    <form action="{{ url_for('kategoriapp.kategori_list') }}" method="GET">
+                         <input type="search" name="search" placeholder="Search..." value="{{ search_query if search_query else '' }}">
+                       <button type="submit" style="display: none;">Search</button> </form>
+                </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Kategori</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for kategori in kategoris %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ kategori.nama_kategori }}</td>
+                        <td>
+                            <form action="{{ url_for('kategoriapp.hapus_kategori', id=kategori.no) }}" method="post" style="display:inline;">
+                                <button type="submit" class="btn-aksi delete" onclick="return confirm('Are you sure you want to delete this category?');">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'layouts/base.html' %}
+{% set active_page = 'user_list' %}
+
+{% block title %}Data User - SecureStore{% endblock %}
+
+{% block breadcrumbs %}Data User{% endblock %}
+
+{% block content %}
+<section class="data-user-page">
+    <div class="content-banner">
+        <h2>Data User</h2>
+    </div>
+
+    <div class="table-card">
+        <div class="table-actions">
+            <div class="actions-left">
+                <button class="btn btn-primary"><a href="{{ url_for('userapp.tambah_user') }}" class="btn-tambah">+ Tambah</a></button>
+            </div>
+                <div class="actions-right">
+                    <form action="{{ url_for('userapp.user_list') }}" method="GET">
+                         <input type="search" name="search" placeholder="Search..." value="{{ search_query if search_query else '' }}">
+                       <button type="submit" style="display: none;">Search</button> </form>
+                </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Lengkap</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ user.nama_lengkap }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.role }}</td>
+                        <td>
+                            <button class="btn-aksi edit"><a href="{{ url_for('userapp.edit_user', id=user.id) }}" class="btn-aksi edit">Edit</a></button>
+                            <form action="{{ url_for('userapp.hapus_user', id=user.id) }}" method="post" style="display:inline;">
+                                <button type="submit" class="btn-aksi delete" onclick="return confirm('Are you sure you want to delete this user?');">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

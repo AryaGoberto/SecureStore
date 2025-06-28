@@ -1,6 +1,5 @@
 from flask import render_template, redirect, url_for, request, flash
 from flask_login import login_user, logout_user, current_user
-from werkzeug.security import generate_password_hash, check_password_hash
 from models.user import User
 from models.kategori import KategoriBarang
 from models.barang import DataBarang
@@ -17,10 +16,10 @@ def login_controller():
 
         if user and user.check_password(password):
             login_user(user, remember=remember_me)
-            # flash('Logged in successfully.', 'success')
+            flash('Logged in successfully.', 'success')
             return redirect(url_for('authapp.dashboard'))
-        # else:
-            # flash('Invalid username or password.', 'error')
+        else:
+            flash('Invalid username or password.', 'error')
 
     return render_template('login-register.html')
 
@@ -53,13 +52,14 @@ def register_controller():
             new_user.set_password(password)
             db.session.add(new_user)
             db.session.commit()
-            # flash('Account created successfully! You can now log in.', 'success')
+            flash('Account created successfully! You can now log in.', 'success')
             return redirect(url_for('authapp.login'))
 
     return render_template('login-register.html')
 
 def logout_controller():
     logout_user()
+    flash('You have been logged out.', 'success')
     return redirect(url_for('authapp.login'))
 
 def dashboard_controller():
